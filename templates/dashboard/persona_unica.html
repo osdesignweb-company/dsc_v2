@@ -1,0 +1,286 @@
+{% extends 'dashboard/base.html' %}
+{% load widget_tweaks %}
+{%load staticfiles %}
+
+{% block title%}
+    <title>Editar {{ persona.nombre }} {{ persona.primer_apellido }}</title>
+{% endblock %}
+
+{% block styles %}
+<style class="cp-pen-styles">
+    h1 {
+        font-size: 20px;
+        text-align: center;
+        margin: 20px 0 20px;
+    }
+
+    h1 small {
+        display: block;
+        font-size: 15px;
+        padding-top: 8px;
+        color: gray;
+    }
+    .avatar {
+        width: 192px;
+        height: 192px;
+        position: relative;
+        border-radius: 100%;
+        border: 6px solid #f8f8f8;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+        margin: 10px 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script>
+    $(function() {
+        $( document ).ready(function() {
+            $("#id_fecha_nacimiento").datepicker({ 
+                format: 'yyyy-mm-dd'
+            });
+            $("#id_fecha_nacimiento").on("change", function () {
+                var fromdate = $(this).val();
+            });
+        }); 
+    });
+</script>
+{% endblock %}
+
+{% block cuerpo%}
+<a class="nav-link" href="{% url 'dashboard:personas'%}">
+    <button type="button" class="btn btn-primary">Regresar</button>
+</a>
+{% for message in messages %}
+    <div class="alert alert-{{message.tags}}" role="alert">
+        {{message}}
+    </div>
+{% endfor %}
+<div class="container">
+    <br>
+    <form method="POST" action="{% url 'dashboard:persona_unica' persona.id_persona %}" enctype="multipart/form-data" novalidate>
+        <h1>Formulario modificación de usuario</h1>
+        {% csrf_token %}
+        <br>
+        {% if form.errors %}
+        <ul>
+            {% for error in form.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="form-row">
+            <div class="col-sm-3">
+                <br>
+                <label for="foto-usuario" class="col-form-label control-label ">Insertar foto del usuario:</label>
+                <div class="text-center">
+                    {% if persona.imagen %}
+                    <img class="avatar img-circle img-thumbnail" src="{{ persona.imagen.url }}" alt="{{user.name}} Avatar">
+                    {% else %}
+                    <img class="avatar img-circle img-thumbnail" src="{% static 'img/dashboard/default-profile.png' %}"
+                        alt="User Avatar">
+                    {% endif %}
+                    {{ form.imagen | add_class:"text-center center-block file-upload" }}                    
+                </div>
+                <br>
+            </div>
+            <!--/col-md-3-->
+            <div class="col-sm-9">
+                <div class="form-group row">
+                    <label for="nombre-persona" class="col-form-label control-label col-md-2">Nombre:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.nombre | add_class:"form-control letras"}}
+                    </div>
+                    {% for error in form.nombre.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                    <label for="rol" class="col-form-label control-label col-md-2">Rol:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{ form.rol | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.rol.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="form-group row">
+                    <label for="primer-apellido" class="control-label col-form-label col-sm-2">Primer apellido:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.primer_apellido | add_class:"form-control letras"}}
+                    </div>
+                    {% for error in form.primer_apellido.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+
+                    <label for="segundo-apellido" class="col-form-label control-label col-sm-2">Segundo apellido:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.segundo_apellido | add_class:"form-control letras"}}
+                        
+                    </div>
+                    {% for error in form.segundo_apellido.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="form-group row">
+                    <label for="numero-identificacion" class="control-label col-form-label col-sm-2">No.
+                        Identificación:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{ form.id_persona | add_class:"form-control numeros"}}                       
+                    </div>
+                        
+                    {% for error in form.id_persona.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+
+                    <label for="tipo-documento" class="col-form-label control-label col-sm-2">Tipo de documento:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{ form.tipo_documento | add_class:"form-control"}}
+                        
+                    </div>
+                    {% for error in form.tipo_documento.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group row">
+                    <label for="pais" class="col-form-label control-label col-md-2">País de nacimiento:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{ form.pais_persona | add_class:"form-control"}}                       
+                    </div>                        
+                    {% for error in form.pais_nacimiento.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                    <label for="nacimiento" class="col-form-label control-label col-md-2">Fecha de nacimiento:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.fecha_nacimiento | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.fecha_nacimiento.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div>
+                <!-- <div class="form-group row">
+                    <label for="departamento" class="col-form-label control-label col-md-2">Departamento nacimiento:</label>
+                    <div class="col-sm-10 col-md-4">
+                        <select name="" id="departamento" class="form-control selectpicker" title="Seleccione departamento"
+                            disabled>
+                            <option>Cundinamarca</option>
+                        </select>
+                    </div>
+                    <label for="municipio" class="col-form-label control-label col-md-2">Municipio nacimiento:</label>
+                    <div class="col-sm-10 col-md-4">
+                        <select name="" id="municipio" class="form-control selectpicker" title="Seleccione departamento"
+                            disabled>
+                            <option>Bogotá D.C.</option>
+                        </select>
+                    </div>
+                </div> -->
+                <div class="form-group row">
+                    <label for="correo" class="col-form-label control-label col-md-2">Correo:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{ form.correo | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.correo.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                    <label for="sexo" class="col-form-label control-label col-md-2">Sexo:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{ form.sexo | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.sexo.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="form-group row">
+                    <label for="telefono" class="col-form-label control-label col-md-2">Teléfono fijo:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{ form.telefono | add_class:"form-control numeros"}}                        
+                    </div>
+                    {% for error in form.telefono.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                    <label for="celular" class="col-form-label control-label col-md-2">Teléfono celular:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{ form.celular | add_class:"form-control numeros"}}                         
+                    </div>
+                    {% for error in form.celular.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div>
+                <br>
+                <!-- <div class="form-group row">
+                    <label for="password1" class="col-form-label control-label col-md-2">Contraseña:</label>
+                    <div class="col-sm-10 col-md-4">
+                        <input type="password" class="form-control" id="password1" placeholder="Insertar contraseña">
+                    </div>
+                    {% for error in form.password1.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                    <label for="password2" class="col-form-label control-label col-md-2">Confirmar Contraseña:</label>
+                    <div class="col-sm-10 col-md-4">
+                        <input type="password" class="form-control" id="password1" placeholder="Insertar contraseña">
+                    </div>
+                    {% for error in form.password2.errors %}
+                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div> -->
+
+            </div>
+            <!--/col-md-9-->
+        </div>
+        <!--fin form-row-->
+        <br>
+        <br>
+        <div class="col-md-4 offset-md-4">
+            <input type="submit" role="button" class="btn btn-success btn-lg" value="Confirmar modificaciones">
+        </div>
+    </form>
+    <!--fin formulario mayor-->
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        var readURL = function (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.avatar').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $(".file-upload").on('change', function () {
+            readURL(this);
+        });
+
+        $(".numeros").keypress(function (e) {
+            var key = window.event ? e.which : e.keyCode;
+            if (key < 48 || key > 57) {
+                e.preventDefault();
+            }
+        });
+
+        $(".letras").keypress(function (e) {
+            key = e.keyCode || e.w;
+            tecla = String.fromCharCode(key).toLowerCase();
+            letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+            especiales = "8-37-39-46";
+            tecla_especial = false;
+            for (var i in especiales) {
+                if (key == especiales[i]) {
+                    tecla_especial = true;
+                    break;
+                }
+            }
+            if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+                return false;
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'public/base.html'%}
+
+{% load staticfiles %}
+
+{% block title%}
+    <title>Deporte Social Comunitario</title>
+{% endblock %}
+
+{% block styles%}
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/main-login.css' %}" />
+    <style type="text/css">
+        body{
+            background: #fff url("{% static 'img/public/back-general.jpg' %}") no-repeat center center fixed;
+        }
+    </style>
+{% endblock %}
+
+{% block cuerpo %}
+<div class="container">
+    <div class="login-box">
+        <a href="" class="home">
+            <div class="sind clearfix">
+                <img src="{% static 'img/public/sind-logo.PNG'%}" alt="logo sind">
+            </div>
+        </a>
+        <h1>BIENVENIDO</h1>
+        {% if error %}
+            <p class="alert alert-danger">{{ error }}</p>
+        {% endif%}
+        <form action="{% url 'public:login' %}" method="POST">
+            {% csrf_token %}
+            <div class="usuario">
+                {{ form.as_p }}
+            </div>
+            <div class="ingreso-login">
+                <input type="submit" value="Ingresar">
+            </div>
+            <!-- <a href="#" class="ayuda">¿No puedes acceder a tu cuenta?</a> -->
+        </form>
+    </div>
+    <div class="coldeportes">
+        <img src="{% static 'img/public/logo.png'%}" alt="logo coldeportes">
+    </div>
+</div>
+{% endblock %}

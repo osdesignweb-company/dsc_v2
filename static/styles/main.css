@@ -1,0 +1,1030 @@
+/*! HTML5 Boilerplate v6.0.1 | MIT License | https://html5boilerplate.com/ */
+
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+   html {
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * Vendor-prefixed and regular ::selection selectors cannot be combined:
+ * https://stackoverflow.com/a/16982510/7133471
+ *
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*
+ * A better looking defadt horizontal rule
+ */
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+    vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+    resize: vertical;
+}
+
+/* ==========================================================================
+   Browser Upgrade Prompt
+   ========================================================================== */
+
+.browserupgrade {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+/*------------general----------------------*/
+
+html {/**modelo caja por si se agrega un padding no nos afecte**/
+    box-sizing: border-box;
+}
+*,*:before, *:after{/** **/
+    box-sizing: inherit;
+}
+body {
+    background-color:  #fff;
+
+}
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+h1 {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+h2 {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 24px;
+}
+h3 {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 20px;
+}
+a {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 12px;
+    text-decoration: none;
+    color: black;
+}
+
+@media only screen and (min-width:480px){
+    .container{
+        padding: 0 5px;
+    }
+}
+@media only screen and (min-width:768px){
+    /*.container{
+        width: 98%;
+    }*/
+}
+@media only screen and (min-width:992px){
+    .container{
+        width: 95%;
+        max-width: 1100px;
+    }
+}
+
+/*----  header-------*/
+
+header.site-header {
+    border: none;    
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color:#ffffff;
+}
+/**------------------topheader------------**/
+
+div.top-header {
+    background-color: #fff;
+    background-color: rgb (255,255,255);
+    color: #069169;
+    color: rgb (6,145,105);
+    text-decoration: none;
+    width: 100%;
+}
+.top-header-logo {
+    /*border-bottom: solid 2px #069169;
+    border-bottom: solid 2px rgb(6,145,105);*/
+    width: 100%;
+    padding-left: 15px;
+}
+.logo-coldeportes {
+    display: none;
+}
+/*.logo-sind{
+    width: 100%;
+    margin: 0 auto 0 auto !important;
+}*/
+.logo-sind img{
+    max-width: 300px;
+    height: 40px;
+    /*float: center;*/
+    display: block;
+    margin: 10px 0 10px 15px;
+}
+.ingreso {
+    width: 200px;
+    /*position: fixed;*/
+    display: block;
+    /*margin-left:5%;*/
+}
+.ingreso input{
+    padding-left: 10px;
+    cursor:pointer;
+    border: none;
+    height: 40px;
+    background: #348fe2;
+    font-family: 'Work Sans', sans-serif;
+    color: #fff;
+    margin-top:5px;
+    margin-left:15px;
+    border: 1px solid #fff;
+    z-index: 100;
+    position: fixed;
+}
+.ingreso input:hover {
+    background: #006850;
+    background: rgb(0,104,80);
+}
+.top-header-info {
+    /*display: inline-block;*/
+    background-color: #069169;
+    background-color: rgb(6,145,105);
+    height: 50px;
+}
+
+div.menu-movil {
+    display:block;
+    width: 55px;
+    text-align: right;
+    top: 52px; 
+    left: 80%;  
+    position: absolute;
+
+}
+div.menu-movil:hover{
+    cursor: pointer;
+    
+}
+div.menu-movil .burger i{
+    margin: 20px 10px 0px 10px;
+    font-size: 30px;
+    color: #fff;
+    color: rgb(255,255,255);
+    display: block;
+}
+div.menu-movil .cross i{
+    margin: 20px 10px 0px 10px;
+    font-size: 30px;
+    color: #fff;
+    color: rgb(255,255,255);
+    display: none;
+}
+
+@media only screen and (min-width:480px){
+    div.menu-movil {
+        width: 60px;
+    }
+
+}
+@media only screen and (min-width:768px){
+    div.menu-movil{
+      display: none;
+    }
+ 
+}
+@media only screen and (min-width:992px){
+
+    .top-header-logo {
+        max-width: 1138px;
+        margin: 0 auto;
+    }
+    .ingreso {
+        max-width: 1138px;
+    }
+    .logo-sind img{
+    margin-left: 0px;
+    }
+    .ingreso input{
+    margin-left: 0px;
+    }
+}
+
+/**----------navegacion principal------------**/
+.navegador {
+    position: relative;
+    display: none;/*funcionalidad hamburguesa*/
+}
+
+nav.navegacion-principal ul{
+    list-style: none;
+    z-index: 2;
+}
+
+nav.navegacion-principal > ul > li{
+    float: bottom;
+}
+nav.navegacion-principal ul::after {
+    content: '';
+    display: block;
+}
+
+/**.navegacion-principal ul.show{ /**estilos submenu desplegable
+    display: block; 
+}**/
+/**nav.navegacion-principal ul.show li{
+    list-style: none;
+}**/
+nav.navegacion-principal ul li a{
+    /*padding: 10px 5%;*/
+    border-top: 1px solid #006850;
+    display: block;
+    width: 10%;
+    color: #006850;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all .3s ease;
+    width: 100%;
+    text-align: right;
+}
+nav.navegacion-principal ul li a:hover {
+    background-color: #069169;
+    color: #fff;
+}
+nav.navegacion-principal ul ul {
+    position: absolute;
+    right: 5%;
+    background-color: rgba(75, 172, 77, 0.856);
+    display: none !important;
+}
+nav.navegacion-principal ul ul li a{
+    color: #ffffff;
+    margin: 0 30px 0 0;
+    padding: 0;
+    text-align: left;
+} 
+nav.navegacion-principal ul ul li a:hover {
+    background-color: #069169;
+    color: #fff;
+}
+
+@media only screen and (min-width:768px){
+    .navegador {
+        display: block;
+        position: absolute;
+        top: 60px;
+        text-align: center;
+        width: 100%;
+        margin: 0px auto 0px auto;
+    }
+    nav.navegacion-principal ul{
+        display: block !important;
+        margin-top: 0;
+    }
+    nav.navegacion-principal ul li a{
+        top: 500px;
+        padding: 0;
+        border-top: 0;
+        display: inline-block !important;
+        text-align: center;
+        color: #fff;
+    }
+    nav.navegacion-principal ul li a:hover {
+        background-color: #006850;
+    }
+    nav.navegacion-principal > ul > li{
+        display: inline-block;
+    }
+    nav.navegacion-principal a{
+        margin-right: 25px;
+        line-height: 30px;
+        width: auto;
+        text-align: center;
+        margin-top: 10px;
+    }
+    nav.navegacion-principal ul li a{
+        font-size: 0.9em;
+    }
+    nav.navegacion-principal ul ul li a{
+        line-height: 40px;
+        margin-top: 5px;
+    } 
+    
+    /*nav.navegacion-principal ul li:hover > ul{
+        display: block !important;
+    }*/
+}
+@media only screen and (min-width:992px){
+    nav.navegacion-principal ul li a{
+        font-size: 1.1em;
+    }
+
+}
+
+/*----------Titulo y logo deportes mas-------------*/
+.titulo {
+    width: 100%;
+    margin: 130px auto 10px auto;
+    color: #7f7f7f;
+    color: rgb(127,127,127);
+}
+.deportes-mas {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.deportes-mas img{
+    width: 300px;
+    margin-bottom: 5px;
+}
+/*@media only screen and (min-width:480px){
+    .deportes-mas img{
+        width: 40%;
+        margin: 0 60% 5px 0;
+    }
+}
+@media only screen and (min-width:480px){
+    .deportes-mas img{
+        width: 30%;
+        margin: 0 70% 5px 0;
+    }
+}*/
+
+/*---------sección de noticias----------*/
+
+.d-block {
+    height: 300px;
+}
+.carousel-caption{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media only screen and (min-width:480px){
+    .d-block {
+        height: 500px;
+    }
+}
+/*----panel indicadores------*/
+.row {
+    margin: 0 -10px;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.row>[class*=col-] {
+    padding: 0 10px;
+}
+
+.col-xs-12 {
+    width: 100%;
+}
+.col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    float: left;
+}
+.hijos-tenant {
+    height: 60px;
+    border-bottom: 2px solid;
+    border-bottom-color: #E6E6E6;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    pointer-events: none;
+    padding-right: 20px;
+}
+
+.f-s-14 {
+    font-size: 14px!important;
+}
+.hijos-tenant > span {
+    margin-left: 20px;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.f-s-16 {
+    font-size: 16px!important;
+}
+.hijos-tenant > a {
+    top: 10px;
+    right: 5px;
+    position: absolute;
+}
+a .btn {
+    color:#fff;
+}
+/*----panel indicadores de calidad-----*/
+
+.mes-indicador {
+    font-size: 16px;
+    text-align: center;
+    background: #52c7b8;
+    color: whitesmoke;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-weight: bold;
+}
+/*.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}*/
+.row>[class*=col-] {
+    padding: 0 10px;
+}
+.indicador {
+    height: 60px;
+    border-bottom: 2px solid #E6E6E6;
+    pointer-events: none;
+}
+
+.hijos-tenant2 {
+    height: 100px;
+    border-bottom: 2px solid;
+    border-bottom-color: #E6E6E6;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    pointer-events: none;
+}
+.f-s-13 {
+    font-size: 13px!important;
+}
+.indicador span {
+    padding-right: 70px;
+}
+
+.hijos-tenant2 > span {
+    margin-left: 30px;
+    margin-top: 10px;
+    display: inline-block;
+}
+.f-s-16 {
+    font-size: 16px!important;
+}
+.hijos-tenant2 .btn {
+    margin-top: 6px;
+    margin-left: 20px;
+    border: 1px solid;
+}
+.btn.btn-success {
+    color: #fff;
+    background: #00acac;
+    border-color: #00acac;
+}
+.indicador a {
+    min-width: 71px;
+}
+
+.hijos-tenant2 > a {
+    top: 5px;
+    right: 5px;
+    position: absolute;
+}
+.btn {
+    font-weight: 300;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+@media only screen and (min-width:768px){
+    .hijos-tenant2 {
+        height: 80px;
+    }
+}
+
+
+/*-----panel de programas----------*/
+
+.panel-body.no-padding, .panel-body.panel-form, .panel-body.panel-full-width, .panel-body.panel-table {
+    padding: 0!important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.panel-body {
+    padding: 15px;
+}
+.owl-carousel {
+    display: none;
+    position: relative;
+    width: 100%;
+    -ms-touch-action: pan-y;
+}
+.owl-carousel .owl-wrapper-outer {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.owl-carousel .owl-wrapper, .owl-carousel .owl-item {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+}
+.owl-carousel .owl-wrapper {
+    display: none;
+    position: relative;
+    -webkit-transform: translate3d(0px, 0px, 0px);
+}
+.owl-carousel .owl-wrapper, .owl-carousel .owl-item {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+}
+.owl-carousel .owl-item {
+    float: left;
+}
+#owl-example .item {
+    text-align: center;
+    padding: 15px 10px;
+    max-width: 100%;
+    min-height: 220px;
+    border-right: 1px solid;
+}#owl-example .item img {
+    max-width: 100%;
+    max-height: 220px;
+}
+#owl-example p {
+    margin: 10px 0 0;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+
+.owl-theme .owl-controls {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.owl-controls {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.owl-theme .owl-controls .owl-page {
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+}
+
+.owl-controls .owl-page, .owl-controls .owl-buttons div {
+    cursor: pointer;
+}
+.owl-theme .owl-controls .owl-page span {
+    display: block;
+    width: 12px;
+    height: 12px;
+    margin: 5px 7px;
+    filter: Alpha(Opacity=50);
+    opacity: 0.5;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    background: #869791;
+}
+.owl-theme .owl-controls .owl-buttons div {
+    color: #FFF;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    margin: 5px;
+    padding: 3px 10px;
+    font-size: 12px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    background: #869791;
+    filter: Alpha(Opacity=50);
+    opacity: 0.5;
+}
+
+.owl-controls .owl-page, .owl-controls .owl-buttons div {
+    cursor: pointer;
+}
+
+
+/**--------redes sociales lateral--------------**/
+
+div.redes-lateral {
+    border: none;    
+    position: fixed;
+    right: 0;
+    top: 40%;
+    width: 45px;
+    background-color: #33A584;
+    background-color: rgb(51,165,132);
+    padding: 10px 0;
+    z-index: 1;
+    /*display:none;*/
+}
+
+div.redes-lateral a{
+    font-size: 2em;
+    margin: 10px 0 0 10px;
+    color: #fff;
+    transition: all .3s ease;
+}
+
+div.redes-lateral a:hover {
+    color:#006850;
+    color:rgb(0,104,80);
+}
+
+/*@media only screen and (min-width:480px){
+    div.redes-lateral {
+        display: block;
+        }
+}*/
+
+
+/*------formulario login--------------*/
+
+#form-login {
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+}
+
+
+/**-----------------footer-----------------**/
+/*footer{
+    width: 100%;
+    background-color:#069169 !important;
+
+}*/
+
+.footer-sitio{
+    /*background-color:#069169 !important;*/
+    width: 100%;
+    background-color:#069169 !important;
+    padding-top: 30px;
+    margin:0 auto;
+    max-width: 1138px
+}
+.contenedor-footer {
+    max-width: 1118px;
+}
+footer.footer-sitio h3 {
+    font-size: 10px;
+    text-decoration: none;
+    transition: all .1s ease;
+    color: #ffffff;
+    margin: 5px 0;
+}
+footer.footer-sitio a {
+    color: #ffffff;
+    font-size: 12px;
+    text-decoration: none;
+    transition: all .3s ease;
+    padding-bottom: 10px;
+}
+footer.footer-sitio a i{
+    font-size: 35px;
+}
+.footer-logo img{
+    max-width: 300px;
+}
+.footer-logo h3 span{
+    font-size: 20px;
+}
+.footer-logo h3 {
+    font-size: 16px;
+    color: #ffffff;
+}
+footer.footer-sitio a:hover {    
+    color: #006850;
+    color: rgb(0,104,80);
+    text-decoration: none;
+}
+
+.footer-sitio .contenedor-footer > div {
+    color: #231f20;
+    padding: 0 20px;
+    text-align-last: left;
+}
+.footer-redessociales {
+    font-size: 2em;
+}
+
+footer.footer-sitio .contenedor-footer > div {
+        text-align-last: center;
+}
+
+
+@media only screen and (min-width:480px){
+    .footer-logo img{
+        width: 250px;
+    }
+    footer.footer-sitio .contenedor-footer > div {
+        width: 50%;
+        float: left;
+    }
+}
+@media only screen and (min-width:768px){
+    footer.footer-sitio .contenedor-footer > div {
+        width: 33.3%;
+        float: left;
+    }
+    .footer-logo img{
+        margin-top: 15px;
+    }
+}
+@media only screen and (min-width:992px){
+    .footer-logo img{
+        width: 300px;
+        margin-top: 0px;
+    }
+}
+
+
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Hide visually and from screen readers
+ */
+
+.hidden {
+    display: none !important;
+}
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ *
+ * 1. For long content, line feeds are not interpreted as spaces and small width
+ *    causes content to wrap 1 word per line:
+ *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+ */
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: inset(50%);
+    clip-path: inset(50%);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap; /* 1 */
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element
+ * to be focusable when navigated to via the keyboard:
+ * https://www.drupal.org/node/897638
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    -webkit-clip-path: none;
+    clip-path: none;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+    white-space: inherit;
+}
+
+/*
+ * Hide visually and from screen readers, but maintain layout
+ */
+
+.invisible {
+    visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 1.25dppx),
+       (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   http://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+
+@media print {
+    *,
+    *:before,
+    *:after {
+        background: transparent !important;
+        color: #000 !important; /* Black prints faster:
+                                   http://www.sanbeiji.com/archives/953 */
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+
+    /*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+
+    a[href^="#"]:after,
+    a[href^="javascript:"]:after {
+        content: "";
+    }
+
+    pre {
+        white-space: pre-wrap !important;
+    }
+    pre,
+    blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    /*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr,
+    img {
+        page-break-inside: avoid;
+    }
+
+    p,
+    h2,
+    h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2,
+    h3 {
+        page-break-after: avoid;
+    }
+}

@@ -1,0 +1,315 @@
+{% extends 'dashboard/base.html' %}
+{% load widget_tweaks %}
+
+{% block title%}
+    <title>Crear Personas</title>
+{% endblock %}
+
+{% block styles%}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+<style class="cp-pen-styles">
+    h1 {
+        font-size: 20px;
+        text-align: center;
+        margin: 20px 0 20px;
+    }
+    h1 small {
+        display: block;
+        font-size: 15px;
+        padding-top: 8px;
+        color: gray;
+    }
+    .avatar {
+        width: 192px;
+        height: 192px;
+        position: relative;
+        border-radius: 100%;
+        border: 6px solid #f8f8f8;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+        margin: 10px 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script>
+    $(function() {
+        $( document ).ready(function() {
+            $("#id_fecha_nacimiento").datepicker({ 
+                format: 'yyyy-mm-dd'
+            });
+            $("#id_fecha_nacimiento").on("change", function () {
+                var fromdate = $(this).val();
+            });
+        }); 
+    });
+</script>
+{% endblock %}
+
+{% block cuerpo%}
+<div class="container">
+<br>
+{% for message in messages %}
+    <div class="alert alert-{{message.tags}}" role="alert">
+        {{message}}
+    </div>
+{% endfor %}
+<form method="POST" action="{% url 'dashboard:crear_persona' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1>Formulario creación de usuarios</h1>
+    <br>
+    {% if form.errors %}
+    <ul>
+        {% for error in form.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link active" href="#formulario1" data-toggle="tab">Paso 1</a></li>
+        <li class="nav-item"><a class="nav-link" href="#formulario2" data-toggle="tab">Paso 2</a></li>
+        <li class="nav-item"><a class="nav-link" href="#formulario3" data-toggle="tab">Paso 3</a></li>
+    </ul>
+    <!--tab content-->
+    <div class="tab-content">
+
+        <!--tab formulario 1-->
+        <div class="tab-pane active" id="formulario1">
+            <br>
+                <div class="form-group row">
+                    <label for="tipo-documento" class="col-form-label control-label col-sm-2">Tipo de documento:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.tipo_documento | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.tipo_documento.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                    <label for="numero-identificacion" class="control-label col-form-label col-sm-2">No. Identificación:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.id_persona | add_class:"form-control numeros"}}
+                    </div>
+                    {% for error in form.id_persona.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="form-group row">
+                    <label for="nombre-persona" class="col-form-label control-label col-md-2">Nombre:</label>
+                    <div class="col-md-10">
+                        {{form.nombre | add_class:"form-control letras"}}
+                    </div>
+                    {% for error in form.nombre.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="form-group row">
+                    <label for="primer-apellido" class="control-label col-form-label col-sm-2">Primer apellido:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.primer_apellido | add_class:"form-control letras"}}
+                    </div>
+                    {% for error in form.primer_apellido.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+
+                    <label for="segundo-apellido" class="col-form-label control-label col-sm-2">Segundo apellido:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.segundo_apellido | add_class:"form-control letras"}}
+                    </div>
+                    {% for error in form.segundo_apellido.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div>
+              
+                <br>
+
+        </div>
+        <!--tab formulario 2-->
+        <div class="tab-pane" id="formulario2">
+            <br>
+                <div class="form-group row">
+                    <label for="pais" class="col-form-label control-label col-md-2">País de nacimiento:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.pais_nacimiento | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.pais_nacimiento.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                    <label for="sexo" class="col-form-label control-label col-md-2">Sexo:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.sexo | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.sexo.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}                   
+                </div>
+                <!-- <div class="form-group row">
+                    <label for="departamento" class="col-form-label control-label col-md-2">Departamento nacimiento:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.departamento_nacimiento | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.departamento_nacimiento.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                    <label for="municipio" class="col-form-label control-label col-md-2">Municipio nacimiento:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.municipio_nacimiento | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.municipio_nacimiento.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div> -->
+                <div class="form-group row">
+                    <label for="correo" class="col-form-label control-label col-md-2">Correo:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.correo | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.correo.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}                   
+
+                    <label for="nacimiento" class="col-form-label control-label col-md-2">Fecha de nacimiento:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.fecha_nacimiento | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.fecha_nacimiento.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="form-group row">
+                    <label for="telefono" class="col-form-label control-label col-md-2">Teléfono fijo:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.telefono | add_class:"form-control numeros"}}
+                    </div>
+                    {% for error in form.telefono.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                    <label for="celular" class="col-form-label control-label col-md-2">Teléfono celular:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.celular | add_class:"form-control numeros"}}
+                    </div>
+                    {% for error in form.celular.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div>
+                <br>
+
+        </div>
+        <!--tab formulario 3-->
+        <div class="tab-pane" id="formulario3">
+                <br>
+                <label for="foto-usuario" class="col-form-label control-label ">Insertar foto del usuario:</label>
+                    <div class="text-center">
+                        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                        <br>
+                        {{ form.imagen | add_class:"text-center center-block file-upload" }}
+                    </div>
+                    </hr><br>
+
+                <div class="form-group row">
+                    <label for="password1" class="col-form-label control-label col-md-2">Contraseña:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.password1 | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.password1.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                    <label for="password2" class="col-form-label control-label col-md-2">Confirmar Contraseña:</label>
+                    <div class="col-sm-10 col-md-4">
+                        {{form.password2 | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.password2.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                </div>
+                <div class="form-group row">
+                    <label for="rol" class="col-form-label control-label col-md-2">Rol:</label>
+                    <div class="col-md-10">
+                        {{form.rol | add_class:"form-control"}}
+                    </div>
+                    {% for error in form.rol.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}
+                    
+                </div>
+
+        </div><!--fin formulario 3-->
+
+
+    </div><!--fin tab content-->
+    <br>
+    <ul class="nav nav-pills justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active" href="#formulario1" data-toggle="tab">Paso 1</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#formulario2" data-toggle="tab">Paso 2</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#formulario3" data-toggle="tab">Paso 3</a>
+        </li>
+    </ul>
+    <br>
+    <div class="col-md-4 offset-md-4">
+        <input type="submit" role="button" class="btn btn-success btn-lg btn-block" value="Confirmar">
+    </div>
+    <br>
+</form><!--fin formulario mayor-->
+</div> <!--fin del container-->
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        var readURL = function (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.avatar').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $(".file-upload").on('change', function () {
+            readURL(this);
+        });
+
+        $(".numeros").keypress(function(e){
+        var key = window.event ? e.which : e.keyCode;
+            if (key < 48 || key > 57) {
+                e.preventDefault();
+            }
+        });
+
+        $(".letras").keypress(function(e){
+            key = e.keyCode || e.w;                
+            tecla = String.fromCharCode(key).toLowerCase();
+            letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+            especiales = "8-37-39-46";                    
+            tecla_especial = false;
+            for(var i in especiales){
+                if(key == especiales[i]){
+                    tecla_especial = true;
+                    break;
+                }
+            } 
+            if(letras.indexOf(tecla)==-1 && !tecla_especial){
+                return false;
+            }    
+        });
+        
+        $("#id_id_persona").attr("placeholder", "N° Documento");
+        $("#id_nombre").attr("placeholder", "Ingrese nombre");
+        $("#id_primer_apellido").attr("placeholder", "Ingrese primer apellido");
+        $("#id_segundo_apellido").attr("placeholder", "Ingrese segundo apellido");
+        $("#id_correo").attr("placeholder", "Ingrese correo");
+        $("#id_telefono").attr("placeholder", "Ingrese telefono");
+        $("#id_celular").attr("placeholder", "Ingrese celular");
+        $("#id_password1").attr("placeholder", "Ingrese contraseña");
+        $("#id_password2").attr("placeholder", "Confirmar contraseña");
+        $("#id_fecha_nacimiento").attr("placeholder", "AAAA-MM-DD");
+    });
+</script>
+{% endblock %}

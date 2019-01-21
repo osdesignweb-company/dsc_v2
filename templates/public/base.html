@@ -1,0 +1,149 @@
+{% load staticfiles%}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% block title%}
+    {% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Import Styles  -->
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/normalize.css'%}">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/main.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/base.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'styles/default.css' %}" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'img/public/favicon.ico' %}">    
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">    
+    
+    <style type="text/css">
+        body{
+            background: #fff url("{% static 'img/public/back-general.jpg' %}") no-repeat center center fixed;
+            -moz-background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+    {% block styles%}
+    {% endblock %}
+    
+</head>
+<body>
+    <div class="container">        
+        <!--header-->
+        <header class="site-header">        
+            <!--top header-->
+            <div class="top-header">
+                <div class="top-header-logo">
+                    <div class="logo-coldeportes">
+                        <img src="{% static 'img/public/sind-logo.PNG' %}" alt="logo sind">
+                    </div>
+                    <div class="logo-sind clearfix">
+                        <a href="{% url 'public:index' %}"><img src="{% static 'img/public/sind-logo.PNG'%}" alt="logo sind"></a>
+                    </div>
+                    <div class=" ingreso">
+                        <a href="{% url 'public:login' %}">
+                            <input type="submit" value="Iniciar sesión">
+                        </a> 
+                    </div>
+                </div>
+                <div class="top-header-info">
+                    <div class="menu-movil clearfix">
+                        <div class="burger">
+                            <i class="fas fa-bars"></i>
+                        </div>
+                        <div class="cross">
+                            <i class="fas fa-bars"></i>
+                       </div>
+                    </div>
+                </div>
+            </div>
+            <!--fin top header-->
+            
+            <!--Navegador-->
+            <div class="navegador">
+                <nav class="navegacion-principal" id="navegacion-principal">
+                    <ul>
+                        <li class=""><a href="{% url 'public:index' %}">INICIO</a>
+                        <li class=""><a href="#">NOTICIAS</a></li>
+                        <li class=""><a href="#">EVENTOS</a></li>
+                        <li class=""><a href="http://www.coldeportes.gov.co/coldeportes/quienes_somos_41474" target="_blank">NOSOTROS</a>
+                    <ul>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                    </ul>
+                    </li>
+                    </ul>
+                </nav>
+            </div>
+            <!--navegador-->
+        </header>
+    </div>
+    <!--fin contenedor1-->
+
+    <!--lista lateral redes sociales-->
+    <div class="redes-lateral">
+        <a href="https://www.facebook.com/Coldeportes/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/Coldeportes" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.instagram.com/coldeportes/?utm_source=ig_embed" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+    <!--fin lista latral redes sociales-->
+    {% block titulo_index %} 
+    {% endblock %}
+        
+    <div id="content" class="content" style="margin-bottom:20px;">
+            {% block cuerpo %}        
+            {% endblock %}
+    </div>
+        
+    <!--inicio footer-->
+    <footer class="footer-sitio">
+        <div class="contenedor-footer clearfix">
+           <div class="footer-logo">
+                <img src="{%static 'img/public/logo.png'%}" alt="logo empresa"><br>
+            </div>
+            <div class="footer-redessociales">
+                <h3><span>REDES SOCIALES</span></h3>
+                <a href="https://www.facebook.com/Coldeportes/" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                <a href="https://twitter.com/Coldeportes" target="_blank"><i class="fab fa-twitter-square" aria-hidden="true"></i></a>
+                <a href="https://www.instagram.com/coldeportes/?utm_source=ig_embed" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a>                     
+            </div>
+            <div class="footer-informacion">
+                <h3>Coldeportes Av. 68 No 55-65 conmutador 57-1-437 70 30</h3>
+                <h3>Línea de Atención al Usuario: 01 8000 910237</h3>
+                <h3>Línea gratuita Bogotá: 57-1- 2258745/ FAX 57-1 - 6300369</h3>
+                <h3>Email de Contacto: contacto@coldeportes.gov.co</h3>
+            </div>
+        </div>
+    </footer>
+    <!--fin footer-->
+
+    <!-- Import Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+           $('.burger').on('click', function () {
+                $(this).hide();
+                $('.cross i').css('display', 'block');
+                $('nav.navegacion-principal ul').show();
+                $('.navegador').show();
+            });
+            $('.cross i').on('click', function () {
+                $(this).hide();
+                $('.burger').show();
+                $('.navegador').hide();
+                $('nav.navegacion-principal ul').hide();
+            });
+        });
+    </script>
+</body>
+</html>

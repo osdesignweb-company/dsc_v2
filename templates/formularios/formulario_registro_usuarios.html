@@ -1,0 +1,589 @@
+{% extends 'dashboard/base.html' %}
+{% load widget_tweaks %}
+
+{% block title%}
+    <title>Registro de usuarios</title>
+{% endblock %}
+
+{% block styles %}
+    <style class="cp-pen-styles">
+    h1 {
+        font-size: 20px;
+        text-align: center;
+        margin: 20px 0 20px;
+        }
+    h1 small {
+        display: block;
+        font-size: 15px;
+        padding-top: 8px;
+        color: gray;
+    }
+    .avatar {
+        width: 192px;
+        height: 192px;
+        position: relative;
+        border-radius: 100%;
+        border: 6px solid #f8f8f8;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+        margin: 10px 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script>
+      $(function() {
+          $( document ).ready(function() {
+            $("#id_fecha_presentacion").datepicker({ 
+                format: 'yyyy-mm-dd'
+            });
+            $("#id_fecha_presentacion").on("change", function () {
+              var fromdate = $(this).val();
+            });
+
+            $("#id_fecha_inicio").datepicker({ 
+                format: 'yyyy-mm-dd'
+            });
+            $("#id_fecha_inicio").on("change", function () {
+                var fromdate = $(this).val();
+            });
+
+            $("#id_fecha_fin").datepicker({ 
+                format: 'yyyy-mm-dd'
+            });
+            $("#id_fecha_fin").on("change", function () {
+                var fromdate = $(this).val();
+            });
+
+            $("#add-btn").click(
+                function(){
+                    $("#add-value").val("true");
+                }
+            );
+
+            $("#id_fecha_presentacion").attr("placeholder", "AAAA-MM-DD");
+            $("#id_cedula").prop("readonly",true);
+          }); 
+      });
+  </script>
+{% endblock %}
+
+{% block cuerpo%}
+<div class="container">
+    <br>
+<form action="{% url 'dashboard:formulario' %}" method="post">
+    {% csrf_token %}
+    <h1>Formulario reporte de usuario</h1>
+    <br>
+    {% if form.errors %}
+    <ul>
+        {% for error in form.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link active" href="#formulario1" data-toggle="tab">Datos de usuario</a></li>
+        <li class="nav-item"><a class="nav-link" href="#formulario2" data-toggle="tab">Reporte usuario</a></li>        
+    </ul>
+    <!--tab content-->
+    <div class="tab-content">
+        <!--tab formulario 1-->
+        <div class="tab-pane active" id="formulario1">
+        <br>      
+
+            <div class="form-group row">
+                <label for="fecha" class="col-form-label control-label col-md-2">Fecha de presentación del reporte de usuario:</label>
+                <div class="col-sm-10 col-md-4">                        
+                    {{ descripcion_form.fecha_presentacion | add_class:"form-control" }}
+                </div>
+                <!-- {% for error in descripcion_form.fecha_presentacion.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                {% endfor %} -->
+                <label for="mes-reportado" class="col-form-label control-label col-md-2">Mes reportado:</label>
+                <div class="col-sm-10 col-md-4">
+                    {{ descripcion_form.mes_reportado | add_class:"form-control" }}
+                </div>
+                <!-- {% for error in descripcion_form.mes_reportadol.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                {% endfor %} -->
+            </div>
+            <div class="form-group row">
+                <label for="departamento" class="control-label col-form-label col-sm-2">Departamento:</label>
+                <div class="col-sm-10 col-md-4">
+                    {{ descripcion_form.departamento | add_class:"form-control" }}
+                </div>
+                <!--{% for error in descripcion_form.departamento.errors %}
+                <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                {% endfor %}-->
+                <label for="municipio" class="control-label col-form-label col-sm-2">Municipio:</label>
+                <div class="col-sm-10 col-md-4">
+                    {{ descripcion_form.municipio_form | add_class:"form-control" }}
+                </div>
+                <!--{% for error in descripcion_form.municipio_form.errors %}
+                <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                {% endfor %}-->
+            </div>
+            <div class="form-group row">
+                <label for="proyecto" class="control-label col-form-label col-sm-2">Nombre proyecto:</label>
+                <div class="col-sm-10 col-md-4">
+                    {{ descripcion_form.nombre_proyecto | add_class:"form-control" }}
+                </div>
+                <!--{% for error in form.id_persona.errors %}
+                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                    {% endfor %}-->
+                    <label for="operador" class="control-label col-form-label col-sm-2">Nombre del operador:</label>
+                    
+                <div class="col-sm-10 col-md-4">
+                    {{ descripcion_form.nombre_operador | add_class:"form-control" }}                    
+                </div>
+                <!--{% for error in form.id_persona.errors %}
+                <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                {% endfor %}-->
+
+            </div>
+            <div class="form-group row">
+                <label for="nombre" class="col-form-label control-label col-md-2">Nombre de la persona que diligencia:</label>
+                <div class="col-sm-10 col-md-4">
+                    <!-- {{ descripcion_form.persona_diligencia | add_class:"form-control" }} -->
+                    <input  name="persona_diligencia" type="text" class="form-control" value="{{fullname}}" placeholder="Ingresar personas" readonly>
+                </div>
+                <!--{% for error in form.nombre.errors %}
+                <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                {% endfor %}-->
+                <label for="cargo" class="col-form-label control-label col-md-2">Cargo:</label>
+                <div class="col-sm-10 col-md-4">
+                    {{ descripcion_form.cargo | add_class:"form-control" }}
+                </div>
+                <!--{% for error in form.rol.errors %}
+                <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                {% endfor %}-->
+            </div>
+            <div class="form-group row">
+                <label for="id" class="col-form-label control-label col-md-2">Número de cédula:</label>
+                <div class="col-sm-10 col-md-4">
+                   <!-- {{ descripcion_form.cedula | add_class:"form-control" }} -->
+                   <input name="cedula" type="text" class="form-control" value="{{request.user.id_persona}}" placeholder="Ingresar personas" readonly>
+                    
+                </div>
+                <!--{% for error in form.nombre.errors %}
+                <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                {% endfor %}-->
+                <label for="contrato" class="col-form-label control-label col-md-2">Número de contrato:</label>
+                <div class="col-sm-10 col-md-4">
+                    {{ descripcion_form.num_contrato | add_class:"form-control" }}
+                    <!-- <input type="text" class="form-control" id="contrato" placeholder="Número de contrato"> -->
+                </div>
+                <!--{% for error in form.rol.errors %}
+                <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                {% endfor %}-->
+            </div>
+            <div class="form-group row">
+                <label for="inicio-contrato" class="col-form-label control-label col-md-2">Fecha inicio de contrato:</label>
+                <div class="col-sm-10 col-md-4">
+                    {{ descripcion_form.fecha_inicio | add_class:"form-control" }}
+                </div>
+                <!--{% for error in form.nombre.errors %}
+                <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                {% endfor %}-->
+                <label for="fin-contrato" class="col-form-label control-label col-md-2">Fecha fin de contrato:</label>
+                <div class="col-sm-10 col-md-4">
+                    {{ descripcion_form.fecha_fin | add_class:"form-control" }}
+                </div>
+                <!--{% for error in form.rol.errors %}
+                <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                {% endfor %}-->
+            </div>
+            <div class="form-group row">
+                <label for="telefono" class="col-form-label control-label col-md-2">Telefono:</label>
+                <div class="col-sm-10 col-md-4">
+                   {{ descripcion_form.telefono | add_class:"form-control" }}
+                </div>
+                <!--{% for error in form.nombre.errors %}
+                <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                {% endfor %}-->
+                <label for="correo" class="col-form-label control-label col-md-2">Correo:</label>
+                <div class="col-sm-10 col-md-4">
+                    {{ descripcion_form.correo | add_class:"form-control" }}
+                    
+                </div>
+                <!--{% for error in form.rol.errors %}
+                <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                {% endfor %}-->
+            </div>
+                
+
+
+                <br>
+            </div><!--fin formulario1-->
+            <div class="tab-pane" id="formulario2">
+            <br>
+            <div class="form-row">
+                <div class="col-sm-3 border-right">
+                    <br>
+                    <label for="municipio-impactado" class="col-form-label control-label ">Municipio impactado:</label>
+                    <div class="">
+                        {{ municipio_form.municipio_fk | add_class:"form-control" }}
+                    </div>
+                    <label for="localizacion" class="col-form-label control-label ">Localización:</label>
+                    <div class="">
+                        {{ municipio_form.poblacion | add_class:"form-control" }}
+                    </div>
+                    <br>
+                </div><!--/col-md-3-->
+                <div class="col-sm-9">
+                    <div class="accordion" id="accordionform">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                        aria-expanded="true" aria-controls="collapseOne">
+                                        EDADES
+                                    </button>
+                                </h2>
+                            </div>
+                    
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionform">
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <label for="edad1" class="col-form-label control-label col-sm-2" style="text-align:right;">0 a 6:</label>
+                                        <div class="col-sm-2">
+                                            {{ edad_form.de_0_a_6 | add_class:"form-control" }}
+                                        </div>
+                                        <!--{% for error in form.nombre.errors %}
+                                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                        {% endfor %}-->
+                                        <label for="edad2" class="col-form-label control-label col-md-2" style="text-align:right;">7 a 11:</label>
+                                        <div class="col-sm-2">
+                                            {{ edad_form.de_7_a_11 | add_class:"form-control" }}
+                                        </div>
+                                        <!--{% for error in form.nombre.errors %}
+                                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                        {% endfor %}-->
+                                        <label for="edad3" class="col-form-label control-label col-md-2" style="text-align:right;">12 a 14:</label>
+                                        <div class="col-sm-2">
+                                            {{ edad_form.de_12_a_14 | add_class:"form-control" }}
+                                        </div>
+                                        <!--{% for error in form.nombre.errors %}
+                                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                        {% endfor %}-->
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="edad4" class="col-form-label control-label col-sm-2" style="text-align:right;">15 a 17:</label>
+                                        <div class="col-sm-2">
+                                            {{ edad_form.de_15_a_17 | add_class:"form-control" }}
+                                        </div>
+                                        <!--{% for error in form.nombre.errors %}
+                                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                        {% endfor %}-->
+                                        <label for="edad5" class="col-form-label control-label col-md-2" style="text-align:right;">18 a 25:</label>
+                                        <div class="col-sm-2">
+                                            {{ edad_form.de_18_a_25 | add_class:"form-control" }}
+                                        </div>
+                                        <!--{% for error in form.nombre.errors %}
+                                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                        {% endfor %}-->
+                                        <label for="edad6" class="col-form-label control-label col-md-2" style="text-align:right;">26 a 60:</label>
+                                        <div class="col-sm-2">
+                                            {{ edad_form.de_26_a_60 | add_class:"form-control" }}
+                                        </div>
+                                        <!--{% for error in form.nombre.errors %}
+                                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                        {% endfor %}-->
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="edad7" class="col-form-label control-label col-sm-2" style="text-align:right;">Mayor a 60:</label>
+                                        <div class="col-sm-2">
+                                            {{ edad_form.mas_de_60 | add_class:"form-control" }}
+                                        </div>
+                                        <!--{% for error in form.nombre.errors %}
+                                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                        {% endfor %}-->
+                                    </div>
+                                </div><!--fin card-body-->
+                            </div><!--fin collapseOne-->
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+                                        aria-expanded="false" aria-controls="collapseTwo">
+                                        PERSONAS SIN DISCAPACIDAD
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionform">
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col-md-6 border-right">
+                                        <br>
+                                        <h2 class="" style="font-weight:bold; text-align: center;">Indígenas (IN):</h2>
+                                        <br>
+                                        <div class="form-group row">
+                                            <label for="in-masculino" class="col-form-label control-label col-sm-2" style="text-align:right;">Mas.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_indigenas_m | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                            <label for="in-femenino" class="col-form-label control-label col-md-2" style="text-align:right;">Fem.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_indigenas_f | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                        </div>
+                                        <br>
+                                        <h2 class="" style="font-weight:bold; text-align: center;">Afro (AF):</h2>
+                                        <br>
+                                        <div class="form-group row">
+                                            <label for="af-masculino" class="col-form-label control-label col-sm-2" style="text-align:right;">Mas.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_afro_m | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                            <label for="af-femenino" class="col-form-label control-label col-md-2" style="text-align:right;">Fem.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_afro_f | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                        </div>
+                                        <br>
+                                        <h2 class="" style="font-weight:bold; text-align: center;">Raizal (RA):</h2>
+                                        <br>
+                                        <div class="form-group row">
+                                            <label for="ra-masculino" class="col-form-label control-label col-sm-2" style="text-align:right;">Mas.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_raizal_m | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                            <label for="ra-femenino" class="col-form-label control-label col-md-2" style="text-align:right;">Fem.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_raizal_f | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                        </div>
+                                        <br>
+                                        <h2 class="" style="font-weight:bold; text-align: center;">Palenquero (PA):</h2>
+                                        <br>
+                                        <div class="form-group row">
+                                            <label for="pa-masculino" class="col-form-label control-label col-sm-2" style="text-align:right;">Mas.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_palenque_m | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                            <label for="pa-femenino" class="col-form-label control-label col-md-2" style="text-align:right;">Fem.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_palenque_f | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                        </div>
+                                    </div><!--fin col-md-6-->
+                                    
+                                    <div class="col-md-6">
+                                        <br>
+                                        <h2 class="" style="font-weight:bold; text-align: center;">Campesino (CA):</h2>
+                                        <br>
+                                        <div class="form-group row">
+                                            <label for="ca-masculino" class="col-form-label control-label col-sm-2" style="text-align:right;">Mas.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_campesino_m | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                            <label for="ca-femenino" class="col-form-label control-label col-md-2" style="text-align:right;">Fem.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_campesino_f | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                        </div>
+                                        <br>
+                                        <h2 class="" style="font-weight:bold; text-align: center;">Rom (RO):</h2>
+                                        <br>
+                                        <div class="form-group row">
+                                            <label for="ro-masculino" class="col-form-label control-label col-sm-2" style="text-align:right;">Mas.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_romm_m | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                            <label for="ro-femenino" class="col-form-label control-label col-md-2" style="text-align:right;">Fem.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_romm_f | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                        </div>
+                                        <br>
+                                        <h2 class="" style="font-weight:bold; text-align: center;">LGBTI (DO):</h2>
+                                        <br>
+                                        <div class="form-group row">
+                                            <label for="do-masculino" class="col-form-label control-label col-sm-4" style="text-align:right;">LGBTI:</label>
+                                            <div class="col-sm-8">
+                                                {{ personas_sd_form.cant_lgbti | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                        </div>
+                                        <br>
+                                        <h2 class="" style="font-weight:bold; text-align: center;">Sin grupo étnico:</h2>
+                                        <br>
+                                        <div class="form-group row">
+                                            <label for="no-masculino" class="col-form-label control-label col-sm-2" style="text-align:right;">Mas.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_singrupo_m | add_class:"form-control" }}
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                            <label for="no-femenino" class="col-form-label control-label col-md-2" style="text-align:right;">Fem.:</label>
+                                            <div class="col-sm-4">
+                                                {{ personas_sd_form.cant_singrupo_f | add_class:"form-control" }}                                                
+                                            </div>
+                                            <!--{% for error in form.nombre.errors %}
+                                                                    <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                                                    {% endfor %}-->
+                                        </div>
+                                    </div><!--fin col-md-6-->
+                                    </div><!--fin form-row-->
+                                </div><!--fin card-body-->
+                            </div><!--fin collapseTwo-->
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+                                        aria-expanded="false" aria-controls="collapseThree">
+                                        PERSONAS CON DISCAPACIDAD
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionform">
+                                <div class="card-body">
+                                    <h2 class="" style="font-weight:bold;">Física:</h2>
+                                    <div class="form-group row">
+                                        <label for="fisica-masculino" class="col-form-label control-label col-sm-2" style="text-align:right;">Masculino:</label>
+                                        <div class="col-sm-4">
+                                            {{ personas_cd_form.cant_fisica_m | add_class:"form-control" }}
+                                        </div>
+                                        <!--{% for error in form.nombre.errors %}
+                                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                        {% endfor %}-->
+                                        <label for="fisica-femenino" class="col-form-label control-label col-md-2" style="text-align:right;">Femenino:</label>
+                                        <div class="col-sm-4">
+                                            {{ personas_cd_form.cant_fisica_f| add_class:"form-control" }}
+                                        </div>
+                                        <!--{% for error in form.nombre.errors %}
+                                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                        {% endfor %}-->
+                                    </div>
+                                    <h2 class="" style="font-weight:bold;">Sensorial:</h2>
+                                    <div class="form-group row">
+                                        <label for="sensorial-masculino" class="col-form-label control-label col-sm-2" style="text-align:right;">Masculino:</label>
+                                        <div class="col-sm-4">
+                                            {{ personas_cd_form.cant_sensorial_m | add_class:"form-control" }}
+                                        </div>
+                                        <!--{% for error in form.nombre.errors %}
+                                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                        {% endfor %}-->
+                                        <label for="sensorial-femenino" class="col-form-label control-label col-md-2" style="text-align:right;">Femenino:</label>
+                                        <div class="col-sm-4">
+                                            {{ personas_cd_form.cant_sensorial_f | add_class:"form-control" }}
+                                        </div>
+                                        <!--{% for error in form.nombre.errors %}
+                                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                        {% endfor %}-->
+                                    </div>
+                                    <h2 class="" style="font-weight:bold;">Intelectual:</h2>
+                                    <div class="form-group row">
+                                        <label for="intelectual-masculino" class="col-form-label control-label col-sm-2" style="text-align:right;">Masculino:</label>
+                                        <div class="col-sm-4">
+                                            {{ personas_cd_form.cant_intelectual_m | add_class:"form-control" }}
+                                        </div>
+                                        <!--{% for error in form.nombre.errors %}
+                                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                        {% endfor %}-->
+                                        <label for="intelectual-femenino" class="col-form-label control-label col-md-2" style="text-align:right;">Femenino:</label>
+                                        <div class="col-sm-4">
+                                            {{ personas_cd_form.cant_intelectual_f | add_class:"form-control" }}
+                                        </div>
+                                        <!--{% for error in form.nombre.errors %}
+                                        <p style="color: red; padding: 2px 0 0 10px">* {{ error }}</p>
+                                        {% endfor %}-->
+                                    </div>
+                                </div><!--fin card-body-->
+                            </div><!--fin collapseThree-->
+                        </div>
+                    </div>
+                   
+                </div><!--/col-md-9-->
+            <br>
+            <div class="col-md-4 offset-md-4" style="margin-top: 20px;">
+                <input type="submit" id="add-btn" role="button" class="btn btn-dark btn-lg" value="¿Ingresar más datos?">
+            </div>
+            </div><!--fin form-row-->
+            </div><!--fin formulario2-->
+        </div><!--fin tab-content-->
+    <br>
+    <br>
+    <ul class="nav nav-pills justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active" href="#formulario1" data-toggle="tab">Datos usuario</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#formulario2" data-toggle="tab">Reporte usuario</a>
+        </li>
+    </ul>
+    <br>
+    <div class="col-md-4 offset-md-4">
+        <input type="submit" role="button" class="btn btn-success btn-lg" value="Confirmar modificaciones">
+    </div>
+    <input type="hidden" id="add-value" name="add-value" value="false">
+
+</form><!--fin formulario mayor-->
+
+</div> <!--fin del container-->
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function(){
+            $("#datepicker").datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+        });
+    </script>
+{% endblock %}
